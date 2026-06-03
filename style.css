@@ -35,12 +35,14 @@
         gap: 15px;
     }
 
-  logo-img {
-    width: 500px !important;
+  .logo-img {
+    width: 300px !important;
+    height: 300px !important;
+    min-width: 300px !important;
 }
 
     .logo-img:hover {
-        transform: scale(1.05);
+        transform: scale(2.05);
     }
 
     .logo-text {

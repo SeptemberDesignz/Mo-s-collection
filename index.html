@@ -22,7 +22,7 @@
             padding: 0 32px;
         }
 
-        /* ========== NEW PREMIUM HEADER STYLES ========== */
+        /* ========== PREMIUM HEADER STYLES ========== */
         header {
             background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
             border-bottom: 2px solid #c9a03d;
@@ -36,36 +36,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 15px 0;
             flex-wrap: wrap;
             gap: 20px;
         }
 
-        /* Premium Logo Container */
+        /* Premium Logo Container - LARGER */
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
-            padding: 8px 20px;
-            border-radius: 60px;
+            padding: 12px 28px;
+            border-radius: 80px;
             border-left: 3px solid #c9a03d;
             border-right: 3px solid #c9a03d;
-            box-shadow: 0 0 15px rgba(201, 160, 61, 0.2);
+            box-shadow: 0 0 20px rgba(201, 160, 61, 0.2);
             transition: all 0.3s ease;
         }
 
         .logo:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(201, 160, 61, 0.3);
+            box-shadow: 0 0 35px rgba(201, 160, 61, 0.4);
         }
 
+        /* LARGE LOGO IMAGE */
         .logo-img {
-            width: 60px !important;
-            height: 60px !important;
-            min-width: 60px !important;
+            width: 80px !important;
+            height: 80px !important;
+            min-width: 80px !important;
             object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(201, 160, 61, 0.3));
+            filter: drop-shadow(0 2px 4px rgba(201, 160, 61, 0.4));
             transition: transform 0.3s ease;
             border-radius: 50%;
         }
@@ -80,9 +81,9 @@
         }
 
         .logo h1 {
-            font-size: 1.6rem;
+            font-size: 2rem;
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             background: linear-gradient(135deg, #c9a03d, #ffd700);
             -webkit-background-clip: text;
             background-clip: text;
@@ -94,13 +95,13 @@
         }
 
         .logo span {
-            font-size: 0.65rem;
+            font-size: 0.75rem;
             font-weight: 400;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             color: #c9a03d;
             text-transform: uppercase;
-            margin-top: 3px;
-            opacity: 0.8;
+            margin-top: 4px;
+            opacity: 0.9;
         }
 
         /* Premium Navigation Links */
@@ -108,7 +109,7 @@
             display: flex;
             gap: 35px;
             background: rgba(20, 20, 20, 0.8);
-            padding: 8px 25px;
+            padding: 10px 30px;
             border-radius: 50px;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(201, 160, 61, 0.3);
@@ -119,7 +120,7 @@
             font-weight: 500;
             color: #e0e0e0;
             transition: all 0.3s ease;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             font-family: 'Inter', sans-serif;
@@ -155,8 +156,8 @@
             color: #e0e0e0;
             transition: all 0.3s;
             background: rgba(20, 20, 20, 0.8);
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,10 +178,10 @@
             right: -5px;
             background: #c9a03d;
             color: black;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: bold;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -581,11 +582,11 @@
             .hero-shoe-img { width: 220px; }
             .product-card { border-radius: 20px; }
             .feature-card { padding: 16px; }
-            .logo { padding: 5px 15px; }
-            .logo-img { width: 45px !important; height: 45px !important; min-width: 45px !important; }
-            .logo h1 { font-size: 1.2rem; letter-spacing: 3px; }
-            .logo span { font-size: 0.5rem; letter-spacing: 2px; }
-            .cart-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+            .logo { padding: 8px 18px; }
+            .logo-img { width: 55px !important; height: 55px !important; min-width: 55px !important; }
+            .logo h1 { font-size: 1.3rem; letter-spacing: 4px; }
+            .logo span { font-size: 0.55rem; letter-spacing: 3px; }
+            .cart-icon { width: 45px; height: 45px; font-size: 1.3rem; }
         }
     </style>
 
@@ -594,7 +595,7 @@
             <div class="nav-bar">
                 <div class="logo">
                     <!-- CHANGE "your-logo.png" TO YOUR ACTUAL LOGO FILENAME -->
-                    <img src="logo.png.png" alt="Mo's Collection Logo" class="logo-img" onerror="this.src='https://placehold.co/60x60/c9a03d/black?text=LOGO'">
+                    <img src="logo.png.png" alt="Mo's Collection Logo" class="logo-img" onerror="this.src='https://placehold.co/80x80/c9a03d/black?text=LOGO'">
                     <div class="logo-text">
                         <h1>MO'S</h1>
                         <span>Collection</span>
