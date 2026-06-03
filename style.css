@@ -176,27 +176,28 @@ header {
 }
 
 /* ========== RATING SECTION ========== */
-.rating-section {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin: 50px 0;
-    flex-wrap: wrap;
+/* Counter animation style */
+.rating-number {
+    font-size: 2rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    color: #c9a03d;
 }
 
 .rating-card {
     text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.rating-card:hover {
+    transform: translateY(-5px);
 }
 
 .rating-card .stars {
     color: #c9a03d;
     font-size: 1.2rem;
     margin-bottom: 10px;
-}
-
-.rating-card .rating-number {
-    font-size: 2rem;
-    font-weight: 700;
 }
 
 .rating-card p {

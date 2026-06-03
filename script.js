@@ -11,6 +11,39 @@ const products = [
 
 let cart = [];
 
+// ========== ANIMATED COUNTERS ==========
+function animateCounter(element, target, duration = 2000) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+            element.innerText = Math.floor(target).toLocaleString();
+            clearInterval(timer);
+        } else {
+            element.innerText = Math.floor(start).toLocaleString();
+        }
+    }, 16);
+}
+
+// Start counters when the section is visible
+function startCounters() {
+    const counters = document.querySelectorAll('.rating-number');
+    const targets = [4.91, 4.85, 4.95];
+    
+    counters.forEach((counter, index) => {
+        // Check if counter is visible
+        const rect = counter.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible && !counter.hasAttribute('data-animated')) {
+            counter.setAttribute('data-animated', 'true');
+            animateCounter(counter, targets[index], 2000);
+        }
+    });
+}
+
+// ========== PRODUCT FUNCTIONS ==========
 function renderProducts() {
     const grid = document.getElementById('productGrid');
     if (!grid) return;
@@ -89,7 +122,7 @@ function updateCart() {
     });
 }
 
-// Event Listeners
+// ========== EVENT LISTENERS ==========
 document.getElementById('closeCartBtn')?.addEventListener('click', () => {
     document.getElementById('cartSidebar').classList.remove('open');
     document.getElementById('overlay').classList.remove('show');
@@ -103,6 +136,16 @@ document.getElementById('overlay')?.addEventListener('click', () => {
 document.querySelector('.cart-icon')?.addEventListener('click', () => {
     document.getElementById('cartSidebar').classList.add('open');
     document.getElementById('overlay').classList.add('show');
+});
+
+// Start counters when page loads and on scroll
+window.addEventListener('load', () => {
+    renderProducts();
+    startCounters();
+});
+
+window.addEventListener('scroll', () => {
+    startCounters();
 });
 
 // Initialize
