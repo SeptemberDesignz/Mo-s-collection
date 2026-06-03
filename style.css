@@ -47,14 +47,14 @@ header {
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
 }
 
 .logo-img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: fit;
+    border-radius: 10%;
     border: 2px solid #c9a03d;
     padding: 5px;
     transition: transform 0.3s;
@@ -65,8 +65,8 @@ header {
 }
 
 .logo h1 {
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 2.5rem;
+    font-weight: 500;
     background: linear-gradient(135deg, #c9a03d, #b8860b);
     -webkit-background-clip: text;
     background-clip: text;
@@ -75,7 +75,7 @@ header {
 }
 
 .logo span {
-    font-size: 0.7rem;
+    font-size: 1.7rem;
     color: #c9a03d;
 }
 
