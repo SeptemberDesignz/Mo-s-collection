@@ -147,6 +147,7 @@ header {
     color: #c9a03d;
 }
 
+/* ========== HERO BANNER WITH MOVING GRADIENT ========== */
 .hero-banner {
     background: linear-gradient(135deg, #c9a03d, #b8860b, #daa520, #c9a03d);
     background-size: 400% 400%;
@@ -212,6 +213,12 @@ header {
     font-weight: 700;
     border-radius: 30px;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .hero-image img {
@@ -345,7 +352,7 @@ header {
 
 .view-details {
     width: 100%;
-    background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+    background: #2c2c2c;
     border: none;
     color: white;
     padding: 10px;
@@ -353,6 +360,7 @@ header {
     font-weight: 600;
     cursor: pointer;
     margin-top: 8px;
+    transition: all 0.3s;
 }
 
 .view-details:hover {
@@ -369,6 +377,7 @@ header {
     font-weight: 600;
     cursor: pointer;
     margin-top: 8px;
+    transition: all 0.3s;
 }
 
 .add-to-cart:hover {
@@ -645,6 +654,7 @@ header {
     cursor: pointer;
 }
 
+/* ========== CHECKOUT MODAL ========== */
 .checkout-modal {
     display: none;
     position: fixed;
@@ -666,27 +676,27 @@ header {
     background: white;
     border-radius: 20px;
     width: 90%;
-    max-width: 600px;
+    max-width: 550px;
     max-height: 85vh;
     overflow-y: auto;
 }
 
 .checkout-header {
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #c9a03d, #b8860b);
     color: white;
-    border-radius: 20px 20px 0 0;
 }
 
 .checkout-close {
     background: none;
     border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
+    font-size: 1.5rem;
     color: white;
+    cursor: pointer;
 }
 
 .checkout-body {
@@ -704,7 +714,7 @@ header {
 .checkout-cart-item {
     display: flex;
     justify-content: space-between;
-    padding: 12px;
+    padding: 10px;
     border-bottom: 1px solid #eee;
 }
 
@@ -740,7 +750,7 @@ header {
 .payment-options {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
@@ -758,13 +768,13 @@ header {
     align-items: center;
     gap: 15px;
     padding: 15px;
-    border: 2px solid #ddd;
+    border: 2px solid #eee;
     border-radius: 12px;
 }
 
 .payment-option input:checked + .payment-card {
     border-color: #c9a03d;
-    background: rgba(201, 160, 61, 0.05);
+    background: #fff9e6;
 }
 
 .payment-card i {
@@ -775,12 +785,11 @@ header {
 .checkout-buttons {
     display: flex;
     gap: 15px;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .checkout-next-btn,
-.checkout-back-btn,
-.checkout-done-btn {
+.checkout-back-btn {
     flex: 1;
     padding: 12px;
     border: none;
@@ -801,7 +810,6 @@ header {
 
 .order-confirmation {
     text-align: center;
-    padding: 20px;
 }
 
 .success-icon {
@@ -812,11 +820,118 @@ header {
 .order-details-box {
     background: #f8f8f8;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 10px;
     margin: 20px 0;
     text-align: left;
 }
 
+.checkout-done-btn {
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* ========== TRACKING MODAL ========== */
+.tracking-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 3500;
+    justify-content: center;
+    align-items: center;
+}
+
+.tracking-modal.show {
+    display: flex;
+}
+
+.tracking-content {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 450px;
+}
+
+.tracking-header {
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.tracking-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+.tracking-body {
+    padding: 20px;
+}
+
+.tracking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tracking-form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.tracking-btn {
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.tracking-result {
+    margin-top: 20px;
+}
+
+/* ========== WHATSAPP BUTTON ========== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s;
+    z-index: 999;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+/* ========== FOOTER ========== */
 footer {
     background: #1a1a2e;
     color: #fff;
@@ -831,4 +946,60 @@ footer {
     margin-bottom: 30px;
 }
 
-.footer
+.footer-col h4 {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #c9a03d;
+}
+
+.footer-col p {
+    color: #aaa;
+    line-height: 1.8;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.footer-col a {
+    color: #aaa;
+    text-decoration: none;
+    line-height: 1.8;
+    font-size: 0.85rem;
+}
+
+.footer-col a:hover {
+    color: #c9a03d;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.copyright {
+    text-align: center;
+    color: #666;
+    font-size: 0.75rem;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    .search-bar {
+        display: none;
+    }
+    .hero-text h2 {
+        font-size: 1.5rem;
+    }
+    .hero-image img {
+        width: 180px;
+    }
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
