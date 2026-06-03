@@ -4,608 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mo's Collection | Premium Footwear</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%); font-family: 'Playfair Display', serif; margin: 0; padding: 0; min-height: 100vh;">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        /* ========== PREMIUM HEADER STYLES ========== */
-        header {
-            background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
-            border-bottom: 2px solid #c9a03d;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        .nav-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        /* Premium Logo Container - LARGER */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
-            padding: 12px 28px;
-            border-radius: 80px;
-            border-left: 3px solid #c9a03d;
-            border-right: 3px solid #c9a03d;
-            box-shadow: 0 0 20px rgba(201, 160, 61, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 35px rgba(201, 160, 61, 0.4);
-        }
-
-        /* LARGE LOGO IMAGE */
-        .logo-img {
-            width: 80px !important;
-            height: 80px !important;
-            min-width: 80px !important;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(201, 160, 61, 0.4));
-            transition: transform 0.3s ease;
-            border-radius: 50%;
-        }
-
-        .logo-img:hover {
-            transform: scale(.08) rotate(5deg);
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 6px;
-            background: linear-gradient(135deg, #c9a03d, #ffd700);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-family: 'Playfair Display', serif;
-            margin: 0;
-            line-height: 1;
-            text-shadow: 0 0 10px rgba(201, 160, 61, 0.3);
-        }
-
-        .logo span {
-            font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 5px;
-            color: #c9a03d;
-            text-transform: uppercase;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        /* Premium Navigation Links */
-        .nav-links {
-            display: flex;
-            gap: 35px;
-            background: rgba(20, 20, 20, 0.8);
-            padding: 10px 30px;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(201, 160, 61, 0.3);
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            font-weight: 500;
-            color: #e0e0e0;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-family: 'Inter', sans-serif;
-            padding: 8px 0;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: #c9a03d;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #c9a03d;
-        }
-
-        /* Premium Cart Icon */
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: #e0e0e0;
-            transition: all 0.3s;
-            background: rgba(20, 20, 20, 0.8);
-            width: 55px;
-            height: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: 1px solid rgba(201, 160, 61, 0.3);
-        }
-
-        .cart-icon:hover {
-            color: #c9a03d;
-            transform: scale(1.05);
-            border-color: #c9a03d;
-            box-shadow: 0 0 15px rgba(201, 160, 61, 0.3);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #c9a03d;
-            color: black;
-            font-size: 0.7rem;
-            font-weight: bold;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Inter', sans-serif;
-            border: 1px solid black;
-        }
-
-        .hero {
-            background: rgba(20, 20, 20, 0.7);
-            margin: 40px 24px;
-            padding: 60px 40px;
-            border: 1px solid #c9a03d;
-            box-shadow: 0 8px 30px rgba(201, 160, 61, 0.1);
-            border-radius: 32px;
-        }
-
-        .hero-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-
-        .hero-content {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .badge {
-            background: transparent;
-            border: 1px solid #c9a03d;
-            color: #c9a03d;
-            padding: 6px 16px;
-            font-size: 0.7rem;
-            display: inline-block;
-            margin-bottom: 24px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-family: 'Inter', sans-serif;
-            border-radius: 30px;
-        }
-
-        .hero-content h2 {
-            font-size: 3.2rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #ffffff;
-        }
-
-        .hero-content p {
-            font-size: 1rem;
-            color: #bbbbbb;
-            margin-bottom: 24px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .price-badge {
-            font-size: 1.4rem;
-            font-weight: 500;
-            margin-bottom: 32px;
-            color: #c9a03d;
-        }
-
-        .btn-primary {
-            background: #c9a03d;
-            color: black;
-            border: none;
-            padding: 14px 36px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Inter', sans-serif;
-            font-weight: bold;
-            transition: all 0.3s;
-            border-radius: 30px;
-        }
-
-        .btn-primary:hover {
-            background: white;
-            color: black;
-            transform: translateY(-2px);
-        }
-
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-
-        .hero-shoe-img {
-            max-width: 100%;
-            width: 320px;
-            animation: gentleMove 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(201, 160, 61, 0.3));
-        }
-
-        @keyframes gentleMove {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .products {
-            padding: 60px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .section-header h2 {
-            font-size: 2.2rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            color: #ffffff;
-        }
-
-        .section-header p {
-            color: #c9a03d;
-            margin-top: 12px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .product-card {
-            background: #111111;
-            border: 1px solid #2a2a2a;
-            transition: 0.4s;
-            border-radius: 24px;
-            overflow: hidden;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            border-color: #c9a03d;
-            box-shadow: 0 20px 40px rgba(201, 160, 61, 0.1);
-        }
-
-        .product-img {
-            background: #0a0a0a;
-            padding: 40px;
-            text-align: center;
-            border-bottom: 1px solid #2a2a2a;
-        }
-
-        .product-image {
-            width: 100%;
-            max-width: 160px;
-            height: auto;
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 24px;
-        }
-
-        .product-title {
-            font-weight: 500;
-            font-size: 1.05rem;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-
-        .product-price {
-            font-weight: 500;
-            color: #c9a03d;
-            margin: 12px 0;
-        }
-
-        .old-price {
-            text-decoration: line-through;
-            color: #666;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
-
-        .discount-badge {
-            background: #c9a03d;
-            color: black;
-            font-size: 0.65rem;
-            padding: 3px 8px;
-            margin-left: 12px;
-            font-weight: bold;
-            border-radius: 20px;
-        }
-
-        .cashback {
-            color: #888;
-            font-size: 0.7rem;
-            margin: 8px 0;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            margin-top: 16px;
-            background: transparent;
-            border: 1px solid #c9a03d;
-            padding: 12px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            color: #c9a03d;
-            transition: all 0.3s;
-            border-radius: 30px;
-        }
-
-        .add-to-cart:hover {
-            background: #c9a03d;
-            color: black;
-            font-weight: bold;
-        }
-
-        .features {
-            background: #0a0a0a;
-            padding: 60px 20px;
-            border-top: 1px solid #c9a03d;
-            border-bottom: 1px solid #c9a03d;
-        }
-
-        .feature-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .feature-card {
-            text-align: center;
-            flex: 1;
-            min-width: 180px;
-            background: #111111;
-            padding: 24px;
-            border-radius: 20px;
-            border: 1px solid #2a2a2a;
-            transition: 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: #c9a03d;
-            transform: translateY(-5px);
-        }
-
-        .feature-card i {
-            font-size: 1.8rem;
-            color: #c9a03d;
-            margin-bottom: 16px;
-        }
-
-        .feature-card h4 {
-            font-weight: 500;
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-            font-family: 'Inter', sans-serif;
-            color: #ffffff;
-        }
-
-        .feature-card p {
-            font-size: 0.75rem;
-            color: #888;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -420px;
-            width: 400px;
-            max-width: 90vw;
-            height: 100%;
-            background: #0a0a0a;
-            border-left: 1px solid #c9a03d;
-            z-index: 1000;
-            transition: right 0.35s;
-            display: flex;
-            flex-direction: column;
-            padding: 28px;
-        }
-
-        .cart-sidebar.open {
-            right: 0;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #c9a03d;
-            padding-bottom: 20px;
-            margin-bottom: 24px;
-        }
-
-        .cart-header h3 {
-            color: #c9a03d;
-        }
-
-        .close-cart {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #c9a03d;
-        }
-
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            color: white;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #2a2a2a;
-            color: white;
-        }
-
-        .remove-item {
-            background: none;
-            border: none;
-            color: #c9a03d;
-            cursor: pointer;
-        }
-
-        .cart-footer {
-            border-top: 1px solid #c9a03d;
-            padding-top: 20px;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .btn-checkout {
-            background: #c9a03d;
-            width: 100%;
-            padding: 14px;
-            border: none;
-            color: black;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-            border-radius: 30px;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.3s;
-            z-index: 999;
-        }
-
-        .overlay.show {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #888;
-            border-top: 1px solid #2a2a2a;
-            font-size: 0.75rem;
-            background: #0a0a0a;
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h2 { font-size: 2rem; }
-            .hero { margin: 20px; padding: 30px; border-radius: 24px; }
-            .nav-links { display: none; }
-            .hero-wrapper { flex-direction: column; text-align: center; }
-            .hero-shoe-img { width: 220px; }
-            .product-card { border-radius: 20px; }
-            .feature-card { padding: 16px; }
-            .logo { padding: 8px 18px; }
-            .logo-img { width: 55px !important; height: 55px !important; min-width: 55px !important; }
-            .logo h1 { font-size: 1.3rem; letter-spacing: 4px; }
-            .logo span { font-size: 0.55rem; letter-spacing: 3px; }
-            .cart-icon { width: 45px; height: 45px; font-size: 1.3rem; }
-        }
-    </style>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        FREE DELIVERY ON ORDERS ABOVE MWK 100,000 | SHOP NOW →
+    </div>
 
     <header>
         <div class="container">
             <div class="nav-bar">
                 <div class="logo">
-                    <!-- CHANGE "your-logo.png" TO YOUR ACTUAL LOGO FILENAME -->
-                    <img src="logo.png.png" alt="Mo's Collection Logo" class="logo-img" onerror="this.src='https://placehold.co/80x80/c9a03d/black?text=LOGO'">
-                    <div class="logo-text">
+                    <img src="your-logo.png" alt="Logo" class="logo-img" onerror="this.src='https://placehold.co/50x50/c9a03d/white?text=MC'">
+                    <div>
                         <h1>MO'S</h1>
                         <span>Collection</span>
                     </div>
                 </div>
-                <div class="nav-links">
-                    <a href="#" class="active">Shop</a>
-                    <a href="#">New Arrivals</a>
-                    <a href="#">Sale</a>
-                    <a href="#">Support</a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for shoes...">
+                    <button><i class="fas fa-search"></i></button>
                 </div>
                 <div class="cart-icon">
                     <i class="fas fa-shopping-bag"></i>
@@ -615,67 +37,96 @@
         </div>
     </header>
 
-    <section class="hero">
+    <!-- NAVIGATION MENU -->
+    <div class="nav-menu">
         <div class="container">
-            <div class="hero-wrapper">
-                <div class="hero-content">
-                    <span class="badge">Limited Time</span>
-                    <h2>Nike Air Max 2025</h2>
-                    <p>Ultimate comfort. Premium style. Step up.</p>
-                    <div class="price-badge">From MWK 250,000</div>
-                    <button class="btn-primary">Shop Now <i class="fas fa-arrow-right"></i></button>
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">Men's Shoes</a>
+                <a href="#">Women's Shoes</a>
+                <a href="#">Kids' Shoes</a>
+                <a href="#">Sport</a>
+                <a href="#">Sale</a>
+                <a href="#">New Arrivals</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- HERO BANNER -->
+        <div class="hero-banner">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Summer Sale<br>Up to 30% Off</h2>
+                    <p>On selected premium footwear</p>
+                    <div class="price">From MWK 89,000</div>
+                    <button class="btn-primary">Shop Now →</button>
                 </div>
                 <div class="hero-image">
-                    <img src="heroshoe.png" alt="Nike Air Max" class="hero-shoe-img" onerror="this.src='https://placehold.co/320x320/1a1a1a/c9a03d?text=Shoe'">
+                    <img src="heroshoe.png" alt="Shoe" onerror="this.src='https://placehold.co/280x280/c9a03d/white?text=Nike'">
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="products">
-        <div class="container">
-            <div class="section-header">
-                <h2>Premium Footwear Collection</h2>
-                <p>Authentic. Comfortable. 100% Genuine.</p>
-            </div>
-            <div class="product-grid" id="productGrid"></div>
+        <!-- CATEGORY SECTION -->
+        <div class="section-header">
+            <h2>Shop by Category</h2>
         </div>
-    </section>
-
-    <section class="features">
-        <div class="container">
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <i class="fas fa-truck-fast"></i>
-                    <h4>Free Express Delivery</h4>
-                    <p>On orders above MWK 100,000</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h4>Authentic Guarantee</h4>
-                    <p>100% genuine footwear</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-rotate-left"></i>
-                    <h4>14-Day Returns</h4>
-                    <p>Hassle-free returns policy</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-headset"></i>
-                    <h4>24/7 Customer Support</h4>
-                    <p>Dedicated care team</p>
-                </div>
+        <div class="category-grid">
+            <div class="category-card">
+                <i class="fas fa-shoe-prints"></i>
+                <h4>Men's Shoes</h4>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-female"></i>
+                <h4>Women's Shoes</h4>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-child"></i>
+                <h4>Kids' Shoes</h4>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-running"></i>
+                <h4>Sports</h4>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-tag"></i>
+                <h4>Sale</h4>
             </div>
         </div>
-    </section>
 
+        <!-- POPULAR PRODUCTS -->
+        <div class="section-header">
+            <h2>Popular Products</h2>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+
+        <!-- PROMO BANNER -->
+        <div class="promo-banner">
+            <h3>Limited Time Offer</h3>
+            <p>Get extra 10% off when you spend MWK 150,000 or more</p>
+            <button class="btn-promo">Shop Now →</button>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div class="newsletter">
+            <h3>Sign Up for Updates</h3>
+            <p>Get exclusive offers and new arrivals straight to your inbox</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button>Subscribe →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3>Your Bag</h3>
             <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
         </div>
         <div class="cart-items" id="cartItemsList">
-            <p>Your bag is empty</p>
+            <p style="text-align:center; color:#888;">Your bag is empty</p>
         </div>
         <div class="cart-footer">
             <div class="cart-total">
@@ -688,111 +139,45 @@
 
     <div class="overlay" id="overlay"></div>
 
+    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p>© 2025 Mo's Collection — Premium Footwear Store. All prices in MWK.</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>MO'S Collection</h4>
+                    <p>Premium footwear for the modern individual.</p>
+                    <p>Blantyre, Malawi</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <p><a href="#">About Us</a></p>
+                    <p><a href="#">Contact Us</a></p>
+                    <p><a href="#">Returns Policy</a></p>
+                    <p><a href="#">FAQs</a></p>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <p><a href="#">Men's Shoes</a></p>
+                    <p><a href="#">Women's Shoes</a></p>
+                    <p><a href="#">Kids' Shoes</a></p>
+                    <p><a href="#">Accessories</a></p>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Mo's Collection — Premium Footwear Store. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <script>
-        const products = [
-            { id: 1, name: "Nike Air Max 2025", price: 250000, oldPrice: 299999, discount: 17, cashback: "5% cashback", image: "nikeairmax.png" },
-            { id: 2, name: "Adidas Ultraboost", price: 230000, oldPrice: 269999, discount: 15, cashback: "5% cashback", image: "adidasultraboost.png" },
-            { id: 3, name: "Jordan Retro 4", price: 280000, oldPrice: 329999, discount: 15, cashback: "3% cashback", image: "jordan4.png" },
-            { id: 4, name: "New Balance 990v6", price: 195000, oldPrice: 229999, discount: 15, cashback: "4% cashback", image: "newbalance990.png" },
-            { id: 5, name: "Yeezy Slide", price: 89000, oldPrice: 119999, discount: 26, cashback: "5% cashback", image: "yeezyslide.png" },
-            { id: 6, name: "Crocs Classic", price: 45000, oldPrice: 59999, discount: 25, cashback: "4% cashback", image: "crocs.png" },
-            { id: 7, name: "Nike Dunk Low", price: 165000, oldPrice: 189999, discount: 13, cashback: "5% cashback", image: "nikedunk.png" },
-            { id: 8, name: "Adidas Samba OG", price: 155000, oldPrice: 179999, discount: 14, cashback: "3% cashback", image: "adidassamba.png" }
-        ];
-
-        let cart = [];
-
-        function renderProducts() {
-            const grid = document.getElementById('productGrid');
-            if (!grid) return;
-            grid.innerHTML = products.map(p => `
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="${p.image}" class="product-image" onerror="this.src='https://placehold.co/160x160/1a1a1a/c9a03d?text=Shoe'">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-title">${p.name}</div>
-                        <div class="product-price">
-                            MWK ${p.price.toLocaleString()}
-                            <span class="old-price">MWK ${p.oldPrice.toLocaleString()}</span>
-                            <span class="discount-badge">-${p.discount}%</span>
-                        </div>
-                        <div class="cashback">💰 ${p.cashback}</div>
-                        <button class="add-to-cart" data-id="${p.id}">Add to Cart</button>
-                    </div>
-                </div>
-            `).join('');
-            document.querySelectorAll('.add-to-cart').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    addToCart(parseInt(btn.dataset.id));
-                });
-            });
-        }
-
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            const existing = cart.find(i => i.id === id);
-            if (existing) existing.quantity++;
-            else cart.push({ ...product, quantity: 1 });
-            updateCart();
-            document.getElementById('cartSidebar').classList.add('open');
-            document.getElementById('overlay').classList.add('show');
-        }
-
-        function updateCart() {
-            const count = cart.reduce((s, i) => s + i.quantity, 0);
-            document.getElementById('cartCount').innerText = count;
-            const container = document.getElementById('cartItemsList');
-            if (cart.length === 0) {
-                container.innerHTML = '<p>Your bag is empty</p>';
-                document.getElementById('cartTotalPrice').innerText = 'MWK 0';
-                return;
-            }
-            let total = 0;
-            container.innerHTML = cart.map(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                return `
-                    <div class="cart-item">
-                        <div><p>${item.name} x${item.quantity}</p><small>MWK ${item.price.toLocaleString()}</small></div>
-                        <div>MWK ${itemTotal.toLocaleString()}</div>
-                        <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-                `;
-            }).join('');
-            document.getElementById('cartTotalPrice').innerText = `MWK ${total.toLocaleString()}`;
-            document.querySelectorAll('.remove-item').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = parseInt(btn.dataset.id);
-                    const index = cart.findIndex(i => i.id === id);
-                    if (cart[index].quantity > 1) cart[index].quantity--;
-                    else cart.splice(index, 1);
-                    updateCart();
-                });
-            });
-        }
-
-        document.getElementById('closeCartBtn')?.addEventListener('click', () => {
-            document.getElementById('cartSidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('show');
-        });
-        document.getElementById('overlay')?.addEventListener('click', () => {
-            document.getElementById('cartSidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('show');
-        });
-        document.querySelector('.cart-icon')?.addEventListener('click', () => {
-            document.getElementById('cartSidebar').classList.add('open');
-            document.getElementById('overlay').classList.add('show');
-        });
-
-        renderProducts();
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
