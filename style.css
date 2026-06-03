@@ -35,13 +35,8 @@
         gap: 15px;
     }
 
-   .logo-img {
-    height: 500px !important;
+  logo-img {
     width: 500px !important;
-    min-width: 500px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-    transition: transform 0.3s ease;
 }
 
     .logo-img:hover {
