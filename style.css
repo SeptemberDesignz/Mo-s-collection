@@ -667,4 +667,290 @@ footer {
     .section-header h2 {
         font-size: 1.5rem;
     }
+}/* ========== PRODUCT MODAL ========== */
+.product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 20px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    z-index: 10;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: #c9a03d;
+}
+
+.modal-body {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.modal-image {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+}
+
+.modal-image img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+}
+
+.modal-info {
+    flex: 1;
+}
+
+.modal-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.modal-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+}
+
+.modal-old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1rem;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.modal-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.size-selector {
+    margin-bottom: 20px;
+}
+
+.size-selector label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.size-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.size-btn {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background: #f8f8f8;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.size-btn:hover {
+    border-color: #c9a03d;
+}
+
+.size-btn.selected {
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    color: #fff;
+    border-color: #c9a03d;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.quantity-selector label {
+    font-weight: 600;
+    color: #333;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    background: #f8f8f8;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.quantity-btn:hover {
+    background: #c9a03d;
+    color: #fff;
+    border-color: #c9a03d;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.modal-add-to-cart {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-add-to-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(201, 160, 61, 0.3);
+}
+
+@media (max-width: 768px) {
+    .modal-body {
+        flex-direction: column;
+        padding: 20px;
+    }
+    .modal-info h2 {
+        font-size: 1.4rem;
+    }
+}/* ========== BEAUTIFUL QUICK VIEW BUTTON ========== */
+.view-details {
+    width: 100%;
+    background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.view-details::before {
+    content: '👁️';
+    margin-right: 8px;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.view-details:hover {
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(201, 160, 61, 0.4);
+}
+
+.view-details:hover::before {
+    transform: scale(1.1);
+}
+
+.view-details:active {
+    transform: translateY(0);
+}
+
+/* Alternate style - Glass morphism version (optional) */
+.view-details-glass {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201, 160, 61, 0.5);
+    color: #c9a03d;
+    padding: 10px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+}
+
+.view-details-glass:hover {
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    color: white;
+    border-color: transparent;
+    transform: scale(1.02);
+}
+
+/* Button container to stack buttons nicely */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product-info .add-to-cart {
+    margin-top: 0;
 }
