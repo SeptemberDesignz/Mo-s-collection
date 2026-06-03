@@ -1,12 +1,12 @@
 const products = [
-    { id: 1, name: "Nike Air Max 2025", price: 250000, oldPrice: 299999, image: "nikeairmax.png" },
-    { id: 2, name: "Adidas Ultraboost", price: 230000, oldPrice: 269999, image: "adidasultraboost.png" },
-    { id: 3, name: "Jordan Retro 4", price: 280000, oldPrice: 329999, image: "jordan4.png" },
-    { id: 4, name: "New Balance 990v6", price: 195000, oldPrice: 229999, image: "newbalance990.png" },
-    { id: 5, name: "Yeezy Slide", price: 89000, oldPrice: 119999, image: "yeezyslide.png" },
-    { id: 6, name: "Crocs Classic", price: 45000, oldPrice: 59999, image: "crocs.png" },
-    { id: 7, name: "Nike Dunk Low", price: 165000, oldPrice: 189999, image: "nikedunk.png" },
-    { id: 8, name: "Adidas Samba OG", price: 155000, oldPrice: 179999, image: "adidassamba.png" }
+    { id: 1, name: "Adidas Samba", price: 35000, oldPrice: 40000, image: "adidas Samba.jpg" },
+    { id: 2, name: "Black Heels", price: 38000, oldPrice: 43000, image: "Black look_Shoes_.jpg" },
+    { id: 3, name: "Men Palm Slipper", price: 28000, oldPrice: 32999, image: "Men palm slipper.jpg" },
+    { id: 4, name: "Penny Lug Sole Loafer", price: 19500, oldPrice: 22999, image: "penny.jpg" },
+    { id: 5, name: "crocs", price: 9000, oldPrice: 11999, image: "crocs.jpeg" },
+    { id: 6, name: "Heels Type(S)", price: 45000, oldPrice: 59999, image: "Heels2.jpeg" },
+    { id: 7, name: "Kids Decent Shoe", price: 35000, oldPrice: 39999, image: "kids1.jpeg" },
+    { id: 8, name: "Women Slides", price: 15000, oldPrice: 19999, image: "Women Slide3.jpeg" }
 ];
 
 let cart = [];
