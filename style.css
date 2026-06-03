@@ -953,4 +953,99 @@ footer {
 
 .product-info .add-to-cart {
     margin-top: 0;
+}/* ========== MOBILE FIXES FOR SEARCH BAR ========== */
+@media (max-width: 768px) {
+    .search-bar {
+        display: flex !important;  /* Force show on mobile */
+        max-width: 100%;
+        order: 2;
+        margin-top: 10px;
+    }
+    
+    .nav-bar {
+        flex-wrap: wrap;
+    }
+    
+    .logo {
+        order: 1;
+    }
+    
+    .cart-icon {
+        order: 2;
+    }
+    
+    .search-bar {
+        order: 3;
+        width: 100%;
+        flex: 1 1 100%;
+    }
+    
+    .search-bar input {
+        width: 100%;
+        padding: 10px 15px;
+    }
+    
+    .search-bar button {
+        padding: 10px 20px;
+    }
+    
+    /* Hero banner mobile fix */
+    .hero-banner {
+        margin: 15px 0;
+        border-radius: 15px;
+    }
+    
+    .hero-content {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-text h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-text .price {
+        font-size: 1.3rem;
+    }
+    
+    .hero-image img {
+        width: 180px;
+        margin-top: 15px;
+    }
+    
+    .btn-primary {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+}/* Premium Hero Box Effect */
+.hero-banner {
+    background: linear-gradient(135deg, #c9a03d, #b8860b);
+    margin: 30px 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(201, 160, 61, 0.3);
+    position: relative;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: rotateGlow 20s linear infinite;
+}
+
+@keyframes rotateGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .hero-banner::before {
+        display: none; /* Remove animation on mobile for performance */
+    }
 }
