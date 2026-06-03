@@ -2,15 +2,503 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mo's Collection | Premium Footwear</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
+<body style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%); font-family: 'Playfair Display', serif; margin: 0; padding: 0; min-height: 100vh;">
 
-    <!-- Header / Navigation -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #c9a03d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: #c9a03d;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo span {
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 42px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 400;
+            color: #e0e0e0;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #c9a03d;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.4rem;
+            color: #e0e0e0;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #c9a03d;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: #c9a03d;
+            color: black;
+            font-size: 0.65rem;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            background: rgba(20, 20, 20, 0.7);
+            margin: 40px 24px;
+            padding: 60px 40px;
+            border: 1px solid #c9a03d;
+            box-shadow: 0 8px 30px rgba(201, 160, 61, 0.1);
+            border-radius: 32px;
+        }
+
+        .hero-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .badge {
+            background: transparent;
+            border: 1px solid #c9a03d;
+            color: #c9a03d;
+            padding: 6px 16px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            border-radius: 30px;
+        }
+
+        .hero-content h2 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            color: #bbbbbb;
+            margin-bottom: 24px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .price-badge {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 32px;
+            color: #c9a03d;
+        }
+
+        .btn-primary {
+            background: #c9a03d;
+            color: black;
+            border: none;
+            padding: 14px 36px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            transition: all 0.3s;
+            border-radius: 30px;
+        }
+
+        .btn-primary:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-shoe-img {
+            max-width: 100%;
+            width: 320px;
+            animation: gentleMove 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(201, 160, 61, 0.3));
+        }
+
+        @keyframes gentleMove {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .products {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .section-header p {
+            color: #c9a03d;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            transition: 0.4s;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: #c9a03d;
+            box-shadow: 0 20px 40px rgba(201, 160, 61, 0.1);
+        }
+
+        .product-img {
+            background: #0a0a0a;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 160px;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 24px;
+        }
+
+        .product-title {
+            font-weight: 500;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .product-price {
+            font-weight: 500;
+            color: #c9a03d;
+            margin: 12px 0;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #666;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .discount-badge {
+            background: #c9a03d;
+            color: black;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            margin-left: 12px;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+
+        .cashback {
+            color: #888;
+            font-size: 0.7rem;
+            margin: 8px 0;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            margin-top: 16px;
+            background: transparent;
+            border: 1px solid #c9a03d;
+            padding: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            color: #c9a03d;
+            transition: all 0.3s;
+            border-radius: 30px;
+        }
+
+        .add-to-cart:hover {
+            background: #c9a03d;
+            color: black;
+            font-weight: bold;
+        }
+
+        .features {
+            background: #0a0a0a;
+            padding: 60px 20px;
+            border-top: 1px solid #c9a03d;
+            border-bottom: 1px solid #c9a03d;
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .feature-card {
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+            background: #111111;
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: #c9a03d;
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 1.8rem;
+            color: #c9a03d;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h4 {
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            font-size: 0.75rem;
+            color: #888;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            max-width: 90vw;
+            height: 100%;
+            background: #0a0a0a;
+            border-left: 1px solid #c9a03d;
+            z-index: 1000;
+            transition: right 0.35s;
+            display: flex;
+            flex-direction: column;
+            padding: 28px;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #c9a03d;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .cart-header h3 {
+            color: #c9a03d;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #c9a03d;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            color: white;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #2a2a2a;
+            color: white;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #c9a03d;
+            cursor: pointer;
+        }
+
+        .cart-footer {
+            border-top: 1px solid #c9a03d;
+            padding-top: 20px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .btn-checkout {
+            background: #c9a03d;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            color: black;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            border-radius: 30px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            border-top: 1px solid #2a2a2a;
+            font-size: 0.75rem;
+            background: #0a0a0a;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h2 { font-size: 2rem; }
+            .hero { margin: 20px; padding: 30px; border-radius: 24px; }
+            .nav-links { display: none; }
+            .hero-wrapper { flex-direction: column; text-align: center; }
+            .hero-shoe-img { width: 220px; }
+            .product-card { border-radius: 20px; }
+            .feature-card { padding: 16px; }
+        }
+    </style>
+
     <header>
         <div class="container">
             <div class="nav-bar">
@@ -32,7 +520,6 @@
         </div>
     </header>
 
-    <!-- Hero Banner -->
     <section class="hero">
         <div class="container">
             <div class="hero-wrapper">
@@ -44,26 +531,22 @@
                     <button class="btn-primary">Shop Now <i class="fas fa-arrow-right"></i></button>
                 </div>
                 <div class="hero-image">
-                    <img src="heroshoe.png" alt="Nike Air Max 2025" class="hero-shoe-img">
+                    <img src="heroshoe.png" alt="Nike Air Max" class="hero-shoe-img" onerror="this.src='https://placehold.co/320x320/1a1a1a/c9a03d?text=Shoe'">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Product Grid Section -->
     <section class="products">
         <div class="container">
             <div class="section-header">
                 <h2>Premium Footwear Collection</h2>
                 <p>Authentic. Comfortable. 100% Genuine.</p>
             </div>
-            <div class="product-grid" id="productGrid">
-                <!-- Products will be dynamically loaded via JavaScript -->
-            </div>
+            <div class="product-grid" id="productGrid"></div>
         </div>
     </section>
 
-    <!-- Features / Trust Badges -->
     <section class="features">
         <div class="container">
             <div class="feature-grid">
@@ -91,14 +574,13 @@
         </div>
     </section>
 
-    <!-- Mini Cart Sidebar -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3>Your Bag</h3>
             <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
         </div>
         <div class="cart-items" id="cartItemsList">
-            <p class="empty-cart-msg">Your bag is empty</p>
+            <p>Your bag is empty</p>
         </div>
         <div class="cart-footer">
             <div class="cart-total">
@@ -117,6 +599,105 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        const products = [
+            { id: 1, name: "Nike Air Max 2025", price: 250000, oldPrice: 299999, discount: 17, cashback: "5% cashback", image: "nikeairmax.png" },
+            { id: 2, name: "Adidas Ultraboost", price: 230000, oldPrice: 269999, discount: 15, cashback: "5% cashback", image: "adidasultraboost.png" },
+            { id: 3, name: "Jordan Retro 4", price: 280000, oldPrice: 329999, discount: 15, cashback: "3% cashback", image: "jordan4.png" },
+            { id: 4, name: "New Balance 990v6", price: 195000, oldPrice: 229999, discount: 15, cashback: "4% cashback", image: "newbalance990.png" },
+            { id: 5, name: "Yeezy Slide", price: 89000, oldPrice: 119999, discount: 26, cashback: "5% cashback", image: "yeezyslide.png" },
+            { id: 6, name: "Crocs Classic", price: 45000, oldPrice: 59999, discount: 25, cashback: "4% cashback", image: "crocs.png" },
+            { id: 7, name: "Nike Dunk Low", price: 165000, oldPrice: 189999, discount: 13, cashback: "5% cashback", image: "nikedunk.png" },
+            { id: 8, name: "Adidas Samba OG", price: 155000, oldPrice: 179999, discount: 14, cashback: "3% cashback", image: "adidassamba.png" }
+        ];
+
+        let cart = [];
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            if (!grid) return;
+            grid.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="${p.image}" class="product-image" onerror="this.src='https://placehold.co/160x160/1a1a1a/c9a03d?text=Shoe'">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-price">
+                            MWK ${p.price.toLocaleString()}
+                            <span class="old-price">MWK ${p.oldPrice.toLocaleString()}</span>
+                            <span class="discount-badge">-${p.discount}%</span>
+                        </div>
+                        <div class="cashback">💰 ${p.cashback}</div>
+                        <button class="add-to-cart" data-id="${p.id}">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    addToCart(parseInt(btn.dataset.id));
+                });
+            });
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(i => i.id === id);
+            if (existing) existing.quantity++;
+            else cart.push({ ...product, quantity: 1 });
+            updateCart();
+            document.getElementById('cartSidebar').classList.add('open');
+            document.getElementById('overlay').classList.add('show');
+        }
+
+        function updateCart() {
+            const count = cart.reduce((s, i) => s + i.quantity, 0);
+            document.getElementById('cartCount').innerText = count;
+            const container = document.getElementById('cartItemsList');
+            if (cart.length === 0) {
+                container.innerHTML = '<p>Your bag is empty</p>';
+                document.getElementById('cartTotalPrice').innerText = 'MWK 0';
+                return;
+            }
+            let total = 0;
+            container.innerHTML = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                return `
+                    <div class="cart-item">
+                        <div><p>${item.name} x${item.quantity}</p><small>MWK ${item.price.toLocaleString()}</small></div>
+                        <div>MWK ${itemTotal.toLocaleString()}</div>
+                        <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('cartTotalPrice').innerText = `MWK ${total.toLocaleString()}`;
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(btn.dataset.id);
+                    const index = cart.findIndex(i => i.id === id);
+                    if (cart[index].quantity > 1) cart[index].quantity--;
+                    else cart.splice(index, 1);
+                    updateCart();
+                });
+            });
+        }
+
+        document.getElementById('closeCartBtn')?.addEventListener('click', () => {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        });
+        document.getElementById('overlay')?.addEventListener('click', () => {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        });
+        document.querySelector('.cart-icon')?.addEventListener('click', () => {
+            document.getElementById('cartSidebar').classList.add('open');
+            document.getElementById('overlay').classList.add('show');
+        });
+
+        renderProducts();
+    </script>
+
 </body>
 </html>
