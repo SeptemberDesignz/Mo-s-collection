@@ -211,7 +211,7 @@ header {
     background: #000;
     color: #c9a03d;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 10 5px 15px rgba(0,0,0,0.1);
 }
 
 .hero-image img {

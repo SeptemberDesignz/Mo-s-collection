@@ -8,6 +8,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+<style>
+    .hero-shoe-img {
+        animation: slideLeftRight 7s ease-in-out infinite !important;
+        transition: all 10s ease !important;
+    }
+    
+    @keyframes slideLeftRight {
+        0% { transform: translateX(0px); }
+        50% { transform: translateX(-50px); }
+        100% { transform: translateX(0px); }
+    }
+    
+    .hero-shoe-img:hover {
+        transform: scale(1.1) !important;
+        filter: drop-shadow(0 20px 30px gold) !important;
+        animation: none !important;
+    }
+</style>
 <body>
 
     <!-- TOP BAR -->
@@ -57,14 +75,14 @@
         <div class="hero-banner">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h2>Summer Sale<br>Up to 30% Off</h2>
-                    <p>On selected premium footwear</p>
-                    <div class="price">From MWK 89,000</div>
+                    <h2>White AirForce<br>Up to 10% Off</h2>
+                    <p>Premium quality footwear at unbeatable prices</p>
+                    <div class="price">From MWK 65,000</div>
                     <button class="btn-primary">Shop Now →</button>
                 </div>
                 <div class="hero-image">
-                    <img src="heroshoe.png" alt="Shoe" onerror="this.src='https://placehold.co/280x280/c9a03d/white?text=Nike'">
-                </div>
+    <img src="Nike Air Force 1.jpg" alt="Shoe" class="hero-shoe-img">
+</div>
             </div>
         </div>
 
