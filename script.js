@@ -1,13 +1,13 @@
-// Product catalog (Apple only)
+// Product catalog - Shoes
 const products = [
-    { id: 1, name: "iPhone 15 Pro", price: 1250000, oldPrice: 1399999, discount: 11, cashback: "5% cashback", icon: "📱", category: "phone" },
-    { id: 2, name: "iPhone 15 Pro Max", price: 1450000, oldPrice: 1599999, discount: 9, cashback: "5% cashback", icon: "📱", category: "phone" },
-    { id: 3, name: "AirPods Pro 2", price: 329000, oldPrice: 399000, discount: 18, cashback: "3% cashback", icon: "🎧", category: "audio" },
-    { id: 4, name: "Apple Watch Series 9", price: 499000, oldPrice: 549000, discount: 9, cashback: "4% cashback", icon: "⌚", category: "watch" },
-    { id: 5, name: "MacBook Air M2", price: 1650000, oldPrice: 1899000, discount: 13, cashback: "5% cashback", icon: "💻", category: "mac" },
-    { id: 6, name: "iPad Pro 11-inch", price: 899000, oldPrice: 999000, discount: 10, cashback: "4% cashback", icon: "📱", category: "ipad" },
-    { id: 7, name: "MacBook Pro 14", price: 2299000, oldPrice: 2599000, discount: 12, cashback: "5% cashback", icon: "💻", category: "mac" },
-    { id: 8, name: "AirPods Max", price: 599000, oldPrice: 679000, discount: 12, cashback: "3% cashback", icon: "🎧", category: "audio" }
+    { id: 1, name: "Nike Air Max 2025", price: 250000, oldPrice: 299999, discount: 17, cashback: "5% cashback", category: "men", image: "nikeairmax.png" },
+    { id: 2, name: "Adidas Ultraboost", price: 230000, oldPrice: 269999, discount: 15, cashback: "5% cashback", category: "men", image: "adidasultraboost.png" },
+    { id: 3, name: "Jordan Retro 4", price: 280000, oldPrice: 329999, discount: 15, cashback: "3% cashback", category: "men", image: "jordan4.png" },
+    { id: 4, name: "New Balance 990v6", price: 195000, oldPrice: 229999, discount: 15, cashback: "4% cashback", category: "men", image: "newbalance990.png" },
+    { id: 5, name: "Yeezy Slide", price: 89000, oldPrice: 119999, discount: 26, cashback: "5% cashback", category: "slides", image: "yeezyslide.png" },
+    { id: 6, name: "Crocs Classic", price: 45000, oldPrice: 59999, discount: 25, cashback: "4% cashback", category: "casual", image: "crocs.png" },
+    { id: 7, name: "Nike Dunk Low", price: 165000, oldPrice: 189999, discount: 13, cashback: "5% cashback", category: "men", image: "nikedunk.png" },
+    { id: 8, name: "Adidas Samba OG", price: 155000, oldPrice: 179999, discount: 14, cashback: "3% cashback", category: "men", image: "adidassamba.png" }
 ];
 
 let cart = [];
@@ -18,7 +18,9 @@ function renderProducts() {
     if (!grid) return;
     grid.innerHTML = products.map(product => `
         <div class="product-card">
-            <div class="product-img">${product.icon}</div>
+            <div class="product-img">
+                <img src="${product.image}" alt="${product.name}" class="product-image">
+            </div>
             <div class="product-info">
                 <div class="product-title">${product.name}</div>
                 <div class="product-price">
@@ -32,7 +34,6 @@ function renderProducts() {
         </div>
     `).join('');
 
-    // Attach event listeners to all 'Add to Cart' buttons
     document.querySelectorAll('.add-to-cart').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -57,7 +58,7 @@ function addToCart(productId) {
     openCartSidebar();
 }
 
-// Update cart UI (count, items, total)
+// Update cart UI
 function updateCartUI() {
     const cartCountSpan = document.getElementById('cartCount');
     const cartItemsContainer = document.getElementById('cartItemsList');
@@ -92,7 +93,6 @@ function updateCartUI() {
 
     if (cartTotalSpan) cartTotalSpan.innerText = `MWK ${totalPrice.toLocaleString()}`;
 
-    // Remove item listeners
     document.querySelectorAll('.remove-item').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = parseInt(btn.getAttribute('data-id'));
@@ -111,12 +111,8 @@ function removeFromCart(id) {
         }
     }
     updateCartUI();
-    if (cart.length === 0 && document.getElementById('cartSidebar').classList.contains('open')) {
-        // keep sidebar but update empty state
-    }
 }
 
-// Sidebar logic
 function openCartSidebar() {
     const sidebar = document.getElementById('cartSidebar');
     const overlay = document.getElementById('overlay');
@@ -131,7 +127,6 @@ function closeCartSidebar() {
     if (overlay) overlay.classList.remove('show');
 }
 
-// Event listeners when DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
 
