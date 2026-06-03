@@ -30,7 +30,21 @@ function getSizesForProduct(product) {
     return sizeOptions.kids;
 }
 
-// ========== MODAL FUNCTIONS ==========
+// ========== TOAST NOTIFICATION ==========
+function showToast(message) {
+    let toast = document.getElementById('toastMsg');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastMsg';
+        toast.style.cssText = 'position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#1a1a2e; color:#c9a03d; padding:10px 20px; border-radius:40px; font-size:0.85rem; z-index:2000; opacity:0; transition:opacity 0.3s; pointer-events:none; font-family:sans-serif; white-space:nowrap;';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+}
+
+// ========== PRODUCT MODAL ==========
 function openProductModal(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
@@ -50,32 +64,27 @@ function openProductModal(productId) {
             <h2>${product.name}</h2>
             <div class="modal-price">
                 MWK ${product.price.toLocaleString()}
-                <span class="modal-old-price">MWK ${product.oldPrice.toLocaleString()}</span>
+                <span style="text-decoration:line-through; color:#999; font-size:1rem; margin-left:10px;">MWK ${product.oldPrice.toLocaleString()}</span>
             </div>
-            <div class="modal-description">
-                <p>${product.description}</p>
-            </div>
+            <p style="color:#666; margin-bottom:20px;">${product.description}</p>
             <div class="size-selector">
-                <label>Select Size:</label>
-                <div class="size-options" id="sizeOptionsContainer">
-                    ${sizes.map(size => `
-                        <button class="size-btn" data-size="${size}">${size}</button>
-                    `).join('')}
+                <label style="font-weight:600;">Select Size:</label>
+                <div class="size-options">
+                    ${sizes.map(size => `<button class="size-btn" data-size="${size}">${size}</button>`).join('')}
                 </div>
             </div>
             <div class="quantity-selector">
-                <label>Quantity:</label>
+                <label style="font-weight:600;">Quantity:</label>
                 <div class="quantity-control">
                     <button class="quantity-btn" id="modalQtyMinus">-</button>
                     <input type="number" class="quantity-input" id="modalQuantity" value="1" min="1" max="10">
                     <button class="quantity-btn" id="modalQtyPlus">+</button>
                 </div>
             </div>
-            <button class="modal-add-to-cart" id="modalAddToCartBtn">🛒 Add to Cart — MWK ${product.price.toLocaleString()}</button>
+            <button class="modal-add-to-cart" id="modalAddToCartBtn">Add to Cart — MWK ${product.price.toLocaleString()}</button>
         </div>
     `;
     
-    // Attach size button events
     document.querySelectorAll('.size-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
@@ -84,7 +93,6 @@ function openProductModal(productId) {
         });
     });
     
-    // Quantity controls
     const qtyInput = document.getElementById('modalQuantity');
     document.getElementById('modalQtyMinus')?.addEventListener('click', () => {
         if (modalQuantity > 1) {
@@ -109,17 +117,16 @@ function openProductModal(productId) {
         updateModalPrice();
     });
     
-    // Add to cart from modal
     document.getElementById('modalAddToCartBtn')?.addEventListener('click', () => {
         if (!selectedSize) {
-            showToast("⚠️ Please select a size!");
+            showToast("Please select a size!");
             return;
         }
         for (let i = 0; i < modalQuantity; i++) {
             addToCart(product.id);
         }
         document.getElementById('productModal').classList.remove('show');
-        showToast(`✨ ${modalQuantity}x ${product.name} (${selectedSize}) added!`);
+        showToast(`${modalQuantity}x ${product.name} (${selectedSize}) added!`);
     });
     
     document.getElementById('productModal').classList.add('show');
@@ -128,97 +135,8 @@ function openProductModal(productId) {
 function updateModalPrice() {
     const btn = document.getElementById('modalAddToCartBtn');
     if (btn && currentProduct) {
-        btn.innerHTML = `🛒 Add to Cart — MWK ${(currentProduct.price * modalQuantity).toLocaleString()}`;
+        btn.innerHTML = `Add to Cart — MWK ${(currentProduct.price * modalQuantity).toLocaleString()}`;
     }
-}
-
-// ========== PRODUCT RENDERING WITH BEAUTIFUL BUTTONS ==========
-function renderProducts() {
-    let filtered = [...products];
-    if (searchQuery.trim() !== "") {
-        const q = searchQuery.toLowerCase();
-        filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
-    }
-    
-    const grid = document.getElementById('productGrid');
-    if (filtered.length === 0) {
-        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">No products found 😢 Try another search!</div>`;
-        return;
-    }
-    grid.innerHTML = filtered.map(p => `
-        <div class="product-card" data-id="${p.id}">
-            <div class="product-img">
-                <img src="${p.image}" class="product-image" onerror="this.src='https://placehold.co/160x160/f8f8f8/c9a03d?text=Shoe'">
-            </div>
-            <div class="product-info">
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">
-                    MWK ${p.price.toLocaleString()}
-                    <span class="old-price">MWK ${p.oldPrice.toLocaleString()}</span>
-                </div>
-                <button class="view-details" data-id="${p.id}">✨ Quick View</button>
-                <button class="add-to-cart" data-id="${p.id}">🛒 Add to Cart</button>
-            </div>
-        </div>
-    `).join('');
-    
-    // View Details buttons
-    document.querySelectorAll('.view-details').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const id = parseInt(btn.dataset.id);
-            openProductModal(id);
-        });
-    });
-    
-    // Add to Cart buttons
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const id = parseInt(btn.dataset.id);
-            addToCart(id);
-        });
-    });
-}
-
-function renderFilteredProducts(productsToShow) {
-    const grid = document.getElementById('productGrid');
-    if (productsToShow.length === 0) {
-        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">No products found in this category 😢</div>`;
-        return;
-    }
-    grid.innerHTML = productsToShow.map(p => `
-        <div class="product-card">
-            <div class="product-img">
-                <img src="${p.image}" class="product-image" onerror="this.src='https://placehold.co/160x160/f8f8f8/c9a03d?text=Shoe'">
-            </div>
-            <div class="product-info">
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">
-                    MWK ${p.price.toLocaleString()}
-                    <span class="old-price">MWK ${p.oldPrice.toLocaleString()}</span>
-                </div>
-                <button class="view-details" data-id="${p.id}">✨ Quick View</button>
-                <button class="add-to-cart" data-id="${p.id}">🛒 Add to Cart</button>
-            </div>
-        </div>
-    `).join('');
-    
-    document.querySelectorAll('.view-details').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const id = parseInt(btn.dataset.id);
-            openProductModal(id);
-        });
-    });
-    
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const id = parseInt(btn.dataset.id);
-            addToCart(id);
-        });
-    });
 }
 
 // ========== CART FUNCTIONS ==========
@@ -227,11 +145,12 @@ function addToCart(id) {
     const existing = cart.find(i => i.id === id);
     if (existing) {
         existing.quantity++;
+        if (selectedSize) existing.selectedSize = selectedSize;
     } else {
         cart.push({ ...product, quantity: 1, selectedSize: selectedSize || "Default" });
     }
     updateCart();
-    showToast(`🛍️ ${product.name} added to bag!`);
+    showToast(`${product.name} added to bag!`);
     document.getElementById('cartSidebar').classList.add('open');
     document.getElementById('overlay').classList.add('show');
 }
@@ -276,7 +195,90 @@ function updateCart() {
     });
 }
 
-// ========== NAVIGATION FUNCTIONS ==========
+// ========== RENDER PRODUCTS ==========
+function renderProducts() {
+    let filtered = [...products];
+    if (searchQuery.trim() !== "") {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
+    }
+    
+    const grid = document.getElementById('productGrid');
+    if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">No products found! Try another search!</div>`;
+        return;
+    }
+    grid.innerHTML = filtered.map(p => `
+        <div class="product-card">
+            <div class="product-img">
+                <img src="${p.image}" class="product-image" onerror="this.src='https://placehold.co/160x160/f8f8f8/c9a03d?text=Shoe'">
+            </div>
+            <div class="product-info">
+                <div class="product-title">${p.name}</div>
+                <div class="product-price">
+                    MWK ${p.price.toLocaleString()}
+                    <span class="old-price">MWK ${p.oldPrice.toLocaleString()}</span>
+                </div>
+                <button class="view-details" data-id="${p.id}">Quick View</button>
+                <button class="add-to-cart" data-id="${p.id}">Add to Cart</button>
+            </div>
+        </div>
+    `).join('');
+    
+    document.querySelectorAll('.view-details').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openProductModal(parseInt(btn.dataset.id));
+        });
+    });
+    
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            addToCart(parseInt(btn.dataset.id));
+        });
+    });
+}
+
+function renderFilteredProducts(productsToShow) {
+    const grid = document.getElementById('productGrid');
+    if (productsToShow.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">No products found in this category!</div>`;
+        return;
+    }
+    grid.innerHTML = productsToShow.map(p => `
+        <div class="product-card">
+            <div class="product-img">
+                <img src="${p.image}" class="product-image" onerror="this.src='https://placehold.co/160x160/f8f8f8/c9a03d?text=Shoe'">
+            </div>
+            <div class="product-info">
+                <div class="product-title">${p.name}</div>
+                <div class="product-price">
+                    MWK ${p.price.toLocaleString()}
+                    <span class="old-price">MWK ${p.oldPrice.toLocaleString()}</span>
+                </div>
+                <button class="view-details" data-id="${p.id}">Quick View</button>
+                <button class="add-to-cart" data-id="${p.id}">Add to Cart</button>
+            </div>
+        </div>
+    `).join('');
+    
+    document.querySelectorAll('.view-details').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openProductModal(parseInt(btn.dataset.id));
+        });
+    });
+    
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            addToCart(parseInt(btn.dataset.id));
+        });
+    });
+}
+
+// ========== NAVIGATION ==========
 function navigateTo(page) {
     currentPage = page;
     
@@ -299,61 +301,107 @@ function navigateTo(page) {
         if (promoBanner) promoBanner.style.display = "block";
         if (newsletter) newsletter.style.display = "block";
         renderProducts();
-    } else if (page === "mens") {
+    } else {
         if (heroBanner) heroBanner.style.display = "none";
         if (categorySection) categorySection.style.display = "none";
         if (promoBanner) promoBanner.style.display = "block";
         if (newsletter) newsletter.style.display = "block";
-        renderFilteredProducts(products.filter(p => p.category === "men"));
-    } else if (page === "womens") {
-        if (heroBanner) heroBanner.style.display = "none";
-        if (categorySection) categorySection.style.display = "none";
-        if (promoBanner) promoBanner.style.display = "block";
-        if (newsletter) newsletter.style.display = "block";
-        renderFilteredProducts(products.filter(p => p.category === "women"));
-    } else if (page === "kids") {
-        if (heroBanner) heroBanner.style.display = "none";
-        if (categorySection) categorySection.style.display = "none";
-        if (promoBanner) promoBanner.style.display = "block";
-        if (newsletter) newsletter.style.display = "block";
-        renderFilteredProducts(products.filter(p => p.category === "kids"));
-    } else if (page === "sport") {
-        if (heroBanner) heroBanner.style.display = "none";
-        if (categorySection) categorySection.style.display = "none";
-        if (promoBanner) promoBanner.style.display = "block";
-        if (newsletter) newsletter.style.display = "block";
-        renderFilteredProducts(products.filter(p => p.tags.includes("sport")));
-    } else if (page === "sale") {
-        if (heroBanner) heroBanner.style.display = "none";
-        if (categorySection) categorySection.style.display = "none";
-        if (promoBanner) promoBanner.style.display = "block";
-        if (newsletter) newsletter.style.display = "block";
-        renderFilteredProducts(products.filter(p => p.tags.includes("sale")));
-    } else if (page === "new") {
-        if (heroBanner) heroBanner.style.display = "none";
-        if (categorySection) categorySection.style.display = "none";
-        if (promoBanner) promoBanner.style.display = "block";
-        if (newsletter) newsletter.style.display = "block";
-        renderFilteredProducts(products.filter(p => p.tags.includes("new")));
+        
+        if (page === "mens") renderFilteredProducts(products.filter(p => p.category === "men"));
+        else if (page === "womens") renderFilteredProducts(products.filter(p => p.category === "women"));
+        else if (page === "kids") renderFilteredProducts(products.filter(p => p.category === "kids"));
+        else if (page === "sport") renderFilteredProducts(products.filter(p => p.tags.includes("sport")));
+        else if (page === "sale") renderFilteredProducts(products.filter(p => p.tags.includes("sale")));
+        else if (page === "new") renderFilteredProducts(products.filter(p => p.tags.includes("new")));
+    }
+}
+
+// ========== CHECKOUT FUNCTIONS ==========
+function openCheckout() {
+    if (cart.length === 0) {
+        showToast("Your cart is empty! Add some shoes first.");
+        return;
     }
     
-    showToast(`📱 Viewing: ${page.toUpperCase()}`);
+    document.querySelectorAll('.checkout-step').forEach(step => step.classList.remove('active'));
+    document.getElementById('checkoutStep1').classList.add('active');
+    displayCheckoutCart();
+    
+    document.getElementById('fullName').value = '';
+    document.getElementById('phoneNumber').value = '';
+    document.getElementById('emailAddress').value = '';
+    document.getElementById('citySelect').value = '';
+    document.getElementById('address').value = '';
+    
+    document.getElementById('checkoutModal').classList.add('show');
 }
 
-function showToast(message) {
-    let toast = document.getElementById('toastMsg');
-    if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'toastMsg';
-        toast.style.cssText = 'position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#1a1a2e; color:#c9a03d; padding:10px 20px; border-radius:40px; font-size:0.85rem; z-index:2000; opacity:0; transition:opacity 0.3s; pointer-events:none; white-space:nowrap; font-family:sans-serif;';
-        document.body.appendChild(toast);
+function displayCheckoutCart() {
+    const container = document.getElementById('checkoutCartItems');
+    let total = 0;
+    
+    if (cart.length === 0) {
+        container.innerHTML = '<p>Your cart is empty</p>';
+        document.getElementById('checkoutTotalAmount').innerHTML = 'MWK 0';
+        return;
     }
-    toast.textContent = message;
-    toast.style.opacity = '1';
-    setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+    
+    container.innerHTML = cart.map(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        return `
+            <div class="checkout-cart-item">
+                <div><strong>${item.name}</strong> x${item.quantity}<br><small>Size: ${item.selectedSize || 'Default'}</small></div>
+                <div>MWK ${itemTotal.toLocaleString()}</div>
+            </div>
+        `;
+    }).join('');
+    
+    document.getElementById('checkoutTotalAmount').innerHTML = `MWK ${total.toLocaleString()}`;
 }
 
-// ========== BUILD CATEGORY GRID ==========
+function generateOrderNumber() {
+    const prefix = 'MO';
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    return `${prefix}${year}${month}${day}${random}`;
+}
+
+function placeOrder() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const phoneNumber = document.getElementById('phoneNumber').value.trim();
+    const city = document.getElementById('citySelect').value;
+    const address = document.getElementById('address').value.trim();
+    
+    if (!fullName) { showToast("Please enter your full name"); return; }
+    if (!phoneNumber) { showToast("Please enter your phone number"); return; }
+    if (!city) { showToast("Please select your city"); return; }
+    if (!address) { showToast("Please enter your delivery address"); return; }
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const orderNumber = generateOrderNumber();
+    const orderDate = new Date().toLocaleString();
+    
+    document.getElementById('orderNumber').innerHTML = orderNumber;
+    document.getElementById('orderDate').innerHTML = orderDate;
+    
+    document.querySelectorAll('.checkout-step').forEach(step => step.classList.remove('active'));
+    document.getElementById('checkoutStep4').classList.add('active');
+    
+    cart = [];
+    updateCart();
+    
+    showToast(`Order placed! Order #: ${orderNumber}`);
+}
+
+function closeCheckout() {
+    document.getElementById('checkoutModal').classList.remove('show');
+}
+
+// ========== CATEGORY GRID ==========
 const categories = [
     { icon: "fas fa-shoe-prints", name: "Men's Shoes", page: "mens" },
     { icon: "fas fa-female", name: "Women's Shoes", page: "womens" },
@@ -373,15 +421,11 @@ function buildCategoryGrid() {
     `).join('');
     
     document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const page = card.dataset.page;
-            navigateTo(page);
-            showToast(`👟 Showing ${card.querySelector('h4').innerText}`);
-        });
+        card.addEventListener('click', () => navigateTo(card.dataset.page));
     });
 }
 
-// ========== INITIALIZE ALL EVENT LISTENERS ==========
+// ========== EVENT LISTENERS ==========
 document.addEventListener('DOMContentLoaded', () => {
     // Modal close
     document.getElementById('modalCloseBtn')?.addEventListener('click', () => {
@@ -405,13 +449,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchBtn')?.addEventListener('click', () => {
         searchQuery = document.getElementById('searchInput').value;
         navigateTo("home");
-        renderProducts();
     });
     document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             searchQuery = e.target.value;
             navigateTo("home");
-            renderProducts();
         }
     });
     
@@ -425,9 +467,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('subscribeBtn')?.addEventListener('click', () => {
         const email = document.getElementById('newsletterEmail')?.value;
         if (!email || !email.includes('@')) {
-            showToast("❌ Please enter a valid email address!");
+            showToast("Please enter a valid email address!");
         } else {
-            showToast(`✅ Subscribed! ${email} will receive updates!`);
+            showToast(`Subscribed! ${email} will receive updates!`);
             document.getElementById('newsletterEmail').value = '';
         }
     });
@@ -445,34 +487,81 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('cartSidebar').classList.remove('open');
         document.getElementById('overlay').classList.remove('show');
     });
+    
+    // Checkout
     document.getElementById('checkoutBtn')?.addEventListener('click', () => {
         if (cart.length === 0) {
-            showToast("🛒 Your bag is empty! Add some shoes first 👟");
+            showToast("Your bag is empty! Add some shoes first.");
         } else {
-            const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
-            showToast(`✅ Order placed! Total: MWK ${total.toLocaleString()}. Thank you!`);
-            cart = [];
-            updateCart();
+            openCheckout();
             document.getElementById('cartSidebar').classList.remove('open');
             document.getElementById('overlay').classList.remove('show');
         }
     });
     
+    document.getElementById('checkoutNext1')?.addEventListener('click', () => {
+        document.getElementById('checkoutStep1').classList.remove('active');
+        document.getElementById('checkoutStep2').classList.add('active');
+    });
+    document.getElementById('checkoutBack2')?.addEventListener('click', () => {
+        document.getElementById('checkoutStep2').classList.remove('active');
+        document.getElementById('checkoutStep1').classList.add('active');
+    });
+    document.getElementById('checkoutNext2')?.addEventListener('click', () => {
+        const fullName = document.getElementById('fullName').value.trim();
+        const phone = document.getElementById('phoneNumber').value.trim();
+        const city = document.getElementById('citySelect').value;
+        const address = document.getElementById('address').value.trim();
+        
+        if (!fullName) { showToast("Please enter your full name"); return; }
+        if (!phone) { showToast("Please enter your phone number"); return; }
+        if (!city) { showToast("Please select your city"); return; }
+        if (!address) { showToast("Please enter your delivery address"); return; }
+        
+        document.getElementById('checkoutStep2').classList.remove('active');
+        document.getElementById('checkoutStep3').classList.add('active');
+    });
+    document.getElementById('checkoutBack3')?.addEventListener('click', () => {
+        document.getElementById('checkoutStep3').classList.remove('active');
+        document.getElementById('checkoutStep2').classList.add('active');
+    });
+    document.getElementById('checkoutNext3')?.addEventListener('click', () => placeOrder());
+    document.getElementById('checkoutCloseBtn')?.addEventListener('click', () => closeCheckout());
+    document.getElementById('checkoutDoneBtn')?.addEventListener('click', () => {
+        closeCheckout();
+        showToast("Thank you for shopping at Mo's Collection!");
+    });
+    document.getElementById('checkoutModal')?.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('checkoutModal')) closeCheckout();
+    });
+    
     // Footer links
     document.getElementById('aboutLink')?.addEventListener('click', (e) => {
         e.preventDefault();
-        showToast("📍 About Us: Premium footwear since 2025 | Blantyre, Malawi");
+        showToast("About Us: Premium footwear since 2025 | Blantyre, Malawi");
     });
     document.getElementById('contactLink')?.addEventListener('click', (e) => {
         e.preventDefault();
-        showToast("📧 support@moscollection.mw | ☎ +265 991 234 567");
+        showToast("Email: support@moscollection.mw | Phone: +265 991 234 567");
     });
-    
-    // Social links
+    document.getElementById('returnsLink')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showToast("Returns: 30-day return policy on all unworn shoes");
+    });
+    document.getElementById('faqLink')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showToast("FAQs: Visit our help center for common questions");
+    });
     document.querySelectorAll('.social-links a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            showToast("🔗 Follow us on social media for exclusive drops!");
+            showToast("Follow us on social media for exclusive drops!");
+        });
+    });
+    document.querySelectorAll('.footer-col a[data-cat]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo(link.dataset.cat);
         });
     });
     

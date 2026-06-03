@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Mo's Collection | Premium Footwear</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
     <!-- NAVIGATION MENU -->
     <div class="nav-menu">
         <div class="container">
-            <div class="nav-links" id="navLinksContainer">
+            <div class="nav-links">
                 <a href="#" data-page="home" class="active">Home</a>
                 <a href="#" data-page="mens">Men's Shoes</a>
                 <a href="#" data-page="womens">Women's Shoes</a>
@@ -54,20 +54,19 @@
 
     <div class="container">
         <!-- HERO BANNER -->
-        <!-- HERO BANNER -->
-<div class="hero-banner" id="heroBanner">
-    <div class="hero-content">
-        <div class="hero-text">
-            <h2>White AirForce<br>Up to 10% Off</h2>
-            <p>Premium quality footwear at unbeatable prices</p>
-            <div class="price">From MWK 65,000</div>
-            <button class="btn-primary" id="heroShopBtn">Shop Now →</button>
+        <div class="hero-banner">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>White AirForce<br>Up to 10% Off</h2>
+                    <p>Premium quality footwear at unbeatable prices</p>
+                    <div class="price">From MWK 65,000</div>
+                    <button class="btn-primary" id="heroShopBtn">Shop Now →</button>
+                </div>
+                <div class="hero-image">
+                    <img src="Nike Air Force 1.jpg" alt="Shoe" class="hero-shoe-img" onerror="this.src='https://placehold.co/280x280/c9a03d/white?text=AirForce'">
+                </div>
+            </div>
         </div>
-        <div class="hero-image">
-            <img src="Nike Air Force 1.jpg" alt="Shoe" class="hero-shoe-img" onerror="this.src='https://placehold.co/280x280/c9a03d/white?text=AirForce'">
-        </div>
-    </div>
-</div>
 
         <!-- CATEGORY SECTION -->
         <div class="section-header">
@@ -82,14 +81,14 @@
         <div class="product-grid" id="productGrid"></div>
 
         <!-- PROMO BANNER -->
-        <div class="promo-banner" id="promoBanner">
+        <div class="promo-banner">
             <h3>Limited Time Offer</h3>
             <p>Get extra 10% off when you spend MWK 150,000 or more</p>
             <button class="btn-promo" id="promoShopBtn">Shop Now →</button>
         </div>
 
         <!-- NEWSLETTER -->
-        <div class="newsletter" id="newsletterSection">
+        <div class="newsletter">
             <h3>Sign Up for Updates</h3>
             <p>Get exclusive offers and new arrivals straight to your inbox</p>
             <div class="newsletter-form">
@@ -113,11 +112,118 @@
                 <span>Total:</span>
                 <span id="cartTotalPrice">MWK 0</span>
             </div>
-            <button class="btn-checkout" id="checkoutBtn">Checkout</button>
+            <button class="btn-checkout" id="checkoutBtn">Proceed to Checkout →</button>
         </div>
     </div>
 
     <div class="overlay" id="overlay"></div>
+
+    <!-- PRODUCT DETAILS MODAL -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalCloseBtn">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h2>Checkout</h2>
+                <button class="checkout-close" id="checkoutCloseBtn">&times;</button>
+            </div>
+            <div class="checkout-body">
+                <div id="checkoutStep1" class="checkout-step active">
+                    <h3>Step 1: Review Your Order</h3>
+                    <div id="checkoutCartItems"></div>
+                    <div class="checkout-total">
+                        <strong>Total Amount:</strong>
+                        <span id="checkoutTotalAmount">MWK 0</span>
+                    </div>
+                    <button class="checkout-next-btn" id="checkoutNext1">Continue to Shipping →</button>
+                </div>
+                <div id="checkoutStep2" class="checkout-step">
+                    <h3>Step 2: Your Information</h3>
+                    <div class="checkout-form">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="fullName" placeholder="John Banda">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="phoneNumber" placeholder="0991 234 567">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="emailAddress" placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>City *</label>
+                            <select id="citySelect">
+                                <option value="">Select City</option>
+                                <option value="Blantyre">Blantyre</option>
+                                <option value="Lilongwe">Lilongwe</option>
+                                <option value="Mzuzu">Mzuzu</option>
+                                <option value="Zomba">Zomba</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Delivery Address *</label>
+                            <textarea id="address" rows="3" placeholder="Street, house number, landmark..."></textarea>
+                        </div>
+                    </div>
+                    <div class="checkout-buttons">
+                        <button class="checkout-back-btn" id="checkoutBack2">← Back</button>
+                        <button class="checkout-next-btn" id="checkoutNext2">Continue to Payment →</button>
+                    </div>
+                </div>
+                <div id="checkoutStep3" class="checkout-step">
+                    <h3>Step 3: Payment Method</h3>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="cod" checked>
+                            <div class="payment-card">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div><strong>Cash on Delivery</strong><small>Pay when you receive</small></div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="airtel">
+                            <div class="payment-card">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div><strong>Airtel Money</strong><small>Pay via Airtel Money</small></div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="mpamba">
+                            <div class="payment-card">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div><strong>TNM Mpamba</strong><small>Pay via Mpamba</small></div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="checkout-buttons">
+                        <button class="checkout-back-btn" id="checkoutBack3">← Back</button>
+                        <button class="checkout-next-btn" id="checkoutNext3">Place Order →</button>
+                    </div>
+                </div>
+                <div id="checkoutStep4" class="checkout-step">
+                    <div class="order-confirmation">
+                        <div class="success-icon">✅</div>
+                        <h3>Order Placed Successfully!</h3>
+                        <p>Thank you for shopping at Mo's Collection!</p>
+                        <div class="order-details-box">
+                            <p><strong>Order Number:</strong> <span id="orderNumber"></span></p>
+                            <p><strong>Date:</strong> <span id="orderDate"></span></p>
+                            <p><strong>Estimated Delivery:</strong> 2-3 business days</p>
+                        </div>
+                        <button class="checkout-done-btn" id="checkoutDoneBtn">Continue Shopping →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer>
@@ -140,16 +246,13 @@
                     <p><a href="#" data-cat="mens">Men's Shoes</a></p>
                     <p><a href="#" data-cat="womens">Women's Shoes</a></p>
                     <p><a href="#" data-cat="kids">Kids' Shoes</a></p>
-                    <p><a href="#" data-cat="accessories">Accessories</a></p>
+                    <p><a href="#">Accessories</a></p>
                 </div>
                 <div class="footer-col">
                     <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#" id="facebookLink"><i class="fab fa-facebook"></i></a>
-                        <a href="#" id="instagramLink"><i class="fab fa-instagram"></i></a>
-                        <a href="#" id="twitterLink"><i class="fab fa-twitter"></i></a>
-                        <a href="#" id="tiktokLink"><i class="fab fa-tiktok"></i></a>
-                    </div>
+                    <p><a href="#" id="facebookLink"><i class="fab fa-facebook"></i> Facebook</a></p>
+                    <p><a href="#" id="instagramLink"><i class="fab fa-instagram"></i> Instagram</a></p>
+                    <p><a href="#" id="twitterLink"><i class="fab fa-twitter"></i> Twitter</a></p>
                 </div>
             </div>
             <div class="copyright">
@@ -159,14 +262,5 @@
     </footer>
 
     <script src="script.js"></script>
-        <!-- PRODUCT DETAILS MODAL -->
-    <div class="product-modal" id="productModal">
-        <div class="modal-content">
-            <button class="modal-close" id="modalCloseBtn">&times;</button>
-            <div class="modal-body" id="modalBody">
-                <!-- Dynamic content loaded here -->
-            </div>
-        </div>
-    </div>
 </body>
 </html>
