@@ -48,12 +48,13 @@ header {
     display: flex;
     align-items: center;
     gap: 15px;
+    cursor: pointer;
 }
 
 .logo-img {
     width: 80px;
     height: 80px;
-    object-fit: fit;
+    object-fit: cover;
     border-radius: 10%;
     border: 2px solid #c9a03d;
     padding: 5px;
@@ -154,6 +155,7 @@ header {
     font-size: 0.85rem;
     text-transform: uppercase;
     transition: color 0.3s;
+    cursor: pointer;
 }
 
 .nav-links a:hover,
@@ -211,13 +213,32 @@ header {
     background: #000;
     color: #c9a03d;
     transform: translateY(-2px);
-    box-shadow: 10 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .hero-image img {
     max-width: 100%;
     width: 280px;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+    animation: slideLeftRight 7s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.hero-shoe-img {
+    animation: slideLeftRight 7s ease-in-out infinite !important;
+    transition: all 10s ease !important;
+}
+
+@keyframes slideLeftRight {
+    0% { transform: translateX(0px); }
+    50% { transform: translateX(-50px); }
+    100% { transform: translateX(0px); }
+}
+
+.hero-shoe-img:hover {
+    transform: scale(1.1) !important;
+    filter: drop-shadow(0 20px 30px gold) !important;
+    animation: none !important;
 }
 
 /* ========== CATEGORY SECTION ========== */
@@ -562,6 +583,7 @@ footer {
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
     color: #333;
+    align-items: center;
 }
 
 .remove-item {

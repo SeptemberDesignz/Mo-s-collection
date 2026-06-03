@@ -8,35 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<style>
-    .hero-shoe-img {
-        animation: slideLeftRight 7s ease-in-out infinite !important;
-        transition: all 10s ease !important;
-    }
-    
-    @keyframes slideLeftRight {
-        0% { transform: translateX(0px); }
-        50% { transform: translateX(-50px); }
-        100% { transform: translateX(0px); }
-    }
-    
-    .hero-shoe-img:hover {
-        transform: scale(1.1) !important;
-        filter: drop-shadow(0 20px 30px gold) !important;
-        animation: none !important;
-    }
-</style>
 <body>
 
     <!-- TOP BAR -->
-    <div class="top-bar">
+    <div class="top-bar" id="topBar">
         FREE DELIVERY ON ORDERS ABOVE MWK 100,000 | SHOP NOW →
     </div>
 
     <header>
         <div class="container">
             <div class="nav-bar">
-                <div class="logo">
+                <div class="logo" id="logoLink">
                     <img src="logo.png.png" alt="Logo" class="logo-img" onerror="this.src='https://placehold.co/50x50/c9a03d/white?text=MC'">
                     <div>
                         <h1>MO'S</h1>
@@ -44,10 +26,10 @@
                     </div>
                 </div>
                 <div class="search-bar">
-                    <input type="text" placeholder="Search for shoes Akasi...">
-                    <button><i class="fas fa-search"></i></button>
+                    <input type="text" id="searchInput" placeholder="Search for shoes Akasi...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
                 </div>
-                <div class="cart-icon">
+                <div class="cart-icon" id="cartIconBtn">
                     <i class="fas fa-shopping-bag"></i>
                     <span class="cart-count" id="cartCount">0</span>
                 </div>
@@ -58,31 +40,31 @@
     <!-- NAVIGATION MENU -->
     <div class="nav-menu">
         <div class="container">
-            <div class="nav-links">
-                <a href="#" class="active">Home</a>
-                <a href="#">Men's Shoes</a>
-                <a href="#">Women's Shoes</a>
-                <a href="#">Kids' Shoes</a>
-                <a href="#">Sport</a>
-                <a href="#">Sale</a>
-                <a href="#">New Arrivals</a>
+            <div class="nav-links" id="navLinksContainer">
+                <a href="#" data-page="home" class="active">Home</a>
+                <a href="#" data-page="mens">Men's Shoes</a>
+                <a href="#" data-page="womens">Women's Shoes</a>
+                <a href="#" data-page="kids">Kids' Shoes</a>
+                <a href="#" data-page="sport">Sport</a>
+                <a href="#" data-page="sale">Sale</a>
+                <a href="#" data-page="new">New Arrivals</a>
             </div>
         </div>
     </div>
 
     <div class="container">
         <!-- HERO BANNER -->
-        <div class="hero-banner">
+        <div class="hero-banner" id="heroBanner">
             <div class="hero-content">
                 <div class="hero-text">
                     <h2>White AirForce<br>Up to 10% Off</h2>
                     <p>Premium quality footwear at unbeatable prices</p>
                     <div class="price">From MWK 65,000</div>
-                    <button class="btn-primary">Shop Now →</button>
+                    <button class="btn-primary" id="heroShopBtn">Shop Now →</button>
                 </div>
                 <div class="hero-image">
-    <img src="Nike Air Force 1.jpg" alt="Shoe" class="hero-shoe-img">
-</div>
+                    <img src="Nike Air Force 1.jpg" alt="Shoe" class="hero-shoe-img" onerror="this.src='https://placehold.co/280x280/c9a03d/white?text=AirForce'">
+                </div>
             </div>
         </div>
 
@@ -90,28 +72,7 @@
         <div class="section-header">
             <h2>Shop by Category</h2>
         </div>
-        <div class="category-grid">
-            <div class="category-card">
-                <i class="fas fa-shoe-prints"></i>
-                <h4>Men's Shoes</h4>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-female"></i>
-                <h4>Women's Shoes</h4>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-child"></i>
-                <h4>Kids' Shoes</h4>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-running"></i>
-                <h4>Sports</h4>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-tag"></i>
-                <h4>Sale</h4>
-            </div>
-        </div>
+        <div class="category-grid" id="categoryGrid"></div>
 
         <!-- POPULAR PRODUCTS -->
         <div class="section-header">
@@ -120,19 +81,19 @@
         <div class="product-grid" id="productGrid"></div>
 
         <!-- PROMO BANNER -->
-        <div class="promo-banner">
+        <div class="promo-banner" id="promoBanner">
             <h3>Limited Time Offer</h3>
             <p>Get extra 10% off when you spend MWK 150,000 or more</p>
-            <button class="btn-promo">Shop Now →</button>
+            <button class="btn-promo" id="promoShopBtn">Shop Now →</button>
         </div>
 
         <!-- NEWSLETTER -->
-        <div class="newsletter">
+        <div class="newsletter" id="newsletterSection">
             <h3>Sign Up for Updates</h3>
             <p>Get exclusive offers and new arrivals straight to your inbox</p>
             <div class="newsletter-form">
-                <input type="email" placeholder="Your email address">
-                <button>Subscribe →</button>
+                <input type="email" id="newsletterEmail" placeholder="Your email address">
+                <button id="subscribeBtn">Subscribe →</button>
             </div>
         </div>
     </div>
@@ -151,7 +112,7 @@
                 <span>Total:</span>
                 <span id="cartTotalPrice">MWK 0</span>
             </div>
-            <button class="btn-checkout">Checkout</button>
+            <button class="btn-checkout" id="checkoutBtn">Checkout</button>
         </div>
     </div>
 
@@ -168,25 +129,25 @@
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
-                    <p><a href="#">About Us</a></p>
-                    <p><a href="#">Contact Us</a></p>
-                    <p><a href="#">Returns Policy</a></p>
-                    <p><a href="#">FAQs</a></p>
+                    <p><a href="#" id="aboutLink">About Us</a></p>
+                    <p><a href="#" id="contactLink">Contact Us</a></p>
+                    <p><a href="#" id="returnsLink">Returns Policy</a></p>
+                    <p><a href="#" id="faqLink">FAQs</a></p>
                 </div>
                 <div class="footer-col">
                     <h4>Categories</h4>
-                    <p><a href="#">Men's Shoes</a></p>
-                    <p><a href="#">Women's Shoes</a></p>
-                    <p><a href="#">Kids' Shoes</a></p>
-                    <p><a href="#">Accessories</a></p>
+                    <p><a href="#" data-cat="mens">Men's Shoes</a></p>
+                    <p><a href="#" data-cat="womens">Women's Shoes</a></p>
+                    <p><a href="#" data-cat="kids">Kids' Shoes</a></p>
+                    <p><a href="#" data-cat="accessories">Accessories</a></p>
                 </div>
                 <div class="footer-col">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" id="facebookLink"><i class="fab fa-facebook"></i></a>
+                        <a href="#" id="instagramLink"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="twitterLink"><i class="fab fa-twitter"></i></a>
+                        <a href="#" id="tiktokLink"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
