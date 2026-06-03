@@ -373,8 +373,10 @@ function generateOrderNumber() {
 function placeOrder() {
     const fullName = document.getElementById('fullName').value.trim();
     const phoneNumber = document.getElementById('phoneNumber').value.trim();
+    const email = document.getElementById('emailAddress').value.trim();
     const city = document.getElementById('citySelect').value;
     const address = document.getElementById('address').value.trim();
+    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
     
     if (!fullName) { showToast("Please enter your full name"); return; }
     if (!phoneNumber) { showToast("Please enter your phone number"); return; }
@@ -385,8 +387,30 @@ function placeOrder() {
     const orderNumber = generateOrderNumber();
     const orderDate = new Date().toLocaleString();
     
+    let paymentName = "";
+    switch(paymentMethod) {
+        case "cod": paymentName = "Cash on Delivery"; break;
+        case "airtel": paymentName = "Airtel Money"; break;
+        case "mpamba": paymentName = "TNM Mpamba"; break;
+    }
+    
     document.getElementById('orderNumber').innerHTML = orderNumber;
     document.getElementById('orderDate').innerHTML = orderDate;
+    
+    // Save order to localStorage
+    const order = {
+        orderNumber: orderNumber,
+        date: orderDate,
+        customer: { fullName, phoneNumber, email, city, address },
+        items: [...cart],
+        total: total,
+        paymentMethod: paymentName,
+        status: "Processing"
+    };
+    
+    let orders = JSON.parse(localStorage.getItem('mo_orders') || '[]');
+    orders.push(order);
+    localStorage.setItem('mo_orders', JSON.stringify(orders));
     
     document.querySelectorAll('.checkout-step').forEach(step => step.classList.remove('active'));
     document.getElementById('checkoutStep4').classList.add('active');
@@ -399,6 +423,162 @@ function placeOrder() {
 
 function closeCheckout() {
     document.getElementById('checkoutModal').classList.remove('show');
+}
+
+// ========== ORDER TRACKING FUNCTIONS ==========
+function openTrackingModal() {
+    document.getElementById('trackingForm').style.display = 'block';
+    document.getElementById('trackingResult').style.display = 'none';
+    document.getElementById('trackingLoading').style.display = 'none';
+    document.getElementById('trackOrderNumber').value = '';
+    document.getElementById('trackPhoneNumber').value = '';
+    document.getElementById('trackingModal').classList.add('show');
+}
+
+function closeTrackingModal() {
+    document.getElementById('trackingModal').classList.remove('show');
+}
+
+function trackOrder() {
+    const orderNumber = document.getElementById('trackOrderNumber').value.trim().toUpperCase();
+    const phoneNumber = document.getElementById('trackPhoneNumber').value.trim();
+    
+    if (!orderNumber || !phoneNumber) {
+        showToast("Please enter both order number and phone number!");
+        return;
+    }
+    
+    document.getElementById('trackingForm').style.display = 'none';
+    document.getElementById('trackingLoading').style.display = 'block';
+    
+    setTimeout(() => {
+        const orders = JSON.parse(localStorage.getItem('mo_orders') || '[]');
+        const order = orders.find(o => o.orderNumber === orderNumber && o.customer.phoneNumber === phoneNumber);
+        
+        document.getElementById('trackingLoading').style.display = 'none';
+        
+        if (!order) {
+            showToast("Order not found! Please check your order number and phone number.");
+            document.getElementById('trackingForm').style.display = 'block';
+            return;
+        }
+        
+        displayOrderStatus(order);
+    }, 800);
+}
+
+function displayOrderStatus(order) {
+    const status = order.status || "Processing";
+    
+    let statusIcon = "";
+    let statusClass = "";
+    let statusText = "";
+    
+    switch(status) {
+        case "Processing":
+            statusIcon = "⏳";
+            statusClass = "status-processing";
+            statusText = "Processing";
+            break;
+        case "Shipped":
+            statusIcon = "🚚";
+            statusClass = "status-shipped";
+            statusText = "Shipped";
+            break;
+        case "Delivered":
+            statusIcon = "✅";
+            statusClass = "status-delivered";
+            statusText = "Delivered";
+            break;
+        default:
+            statusIcon = "⏳";
+            statusClass = "status-processing";
+            statusText = "Processing";
+    }
+    
+    const orderDate = new Date(order.date);
+    const estimatedDate = new Date(orderDate);
+    estimatedDate.setDate(estimatedDate.getDate() + 3);
+    
+    let itemsHtml = '';
+    order.items.forEach(item => {
+        itemsHtml += `<div class="items-list-item">${item.name} × ${item.quantity} - Size: ${item.selectedSize || 'Default'} - MWK ${(item.price * item.quantity).toLocaleString()}</div>`;
+    });
+    
+    const resultHtml = `
+        <button class="back-to-search" id="backToSearchBtn">
+            <i class="fas fa-arrow-left"></i> Back to search
+        </button>
+        
+        <div class="order-status-card">
+            <div class="status-badge ${statusClass}">
+                <i class="fas ${status === 'Processing' ? 'fa-clock' : status === 'Shipped' ? 'fa-truck' : 'fa-check-circle'}"></i>
+                ${statusText}
+            </div>
+            <div class="order-number">Order #${order.orderNumber}</div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-step ${true ? 'active' : ''}">
+                <div class="timeline-dot">📝</div>
+                <span>Order Placed</span>
+            </div>
+            <div class="timeline-step ${status !== 'Processing' ? 'active' : ''}">
+                <div class="timeline-dot">⚙️</div>
+                <span>Processing</span>
+            </div>
+            <div class="timeline-step ${status === 'Shipped' || status === 'Delivered' ? 'active' : ''}">
+                <div class="timeline-dot">🚚</div>
+                <span>Shipped</span>
+            </div>
+            <div class="timeline-step ${status === 'Delivered' ? 'active' : ''}">
+                <div class="timeline-dot">🏠</div>
+                <span>Delivered</span>
+            </div>
+        </div>
+        
+        <div class="order-details-card">
+            <h4><i class="fas fa-info-circle"></i> Order Details</h4>
+            <div class="order-info-row">
+                <span class="order-info-label">Order Date:</span>
+                <span class="order-info-value">${order.date}</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Estimated Delivery:</span>
+                <span class="order-info-value">${estimatedDate.toLocaleDateString()}</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Total Amount:</span>
+                <span class="order-info-value">MWK ${order.total.toLocaleString()}</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Payment Method:</span>
+                <span class="order-info-value">${order.paymentMethod}</span>
+            </div>
+            <div class="order-info-row">
+                <span class="order-info-label">Delivery Address:</span>
+                <span class="order-info-value">${order.customer.address}, ${order.customer.city}</span>
+            </div>
+        </div>
+        
+        <div class="order-details-card">
+            <h4><i class="fas fa-box"></i> Items Ordered</h4>
+            <div class="items-list">
+                ${itemsHtml}
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('trackingResult').innerHTML = resultHtml;
+    document.getElementById('trackingForm').style.display = 'none';
+    document.getElementById('trackingResult').style.display = 'block';
+    
+    document.getElementById('backToSearchBtn')?.addEventListener('click', () => {
+        document.getElementById('trackingResult').style.display = 'none';
+        document.getElementById('trackingForm').style.display = 'block';
+        document.getElementById('trackOrderNumber').value = '';
+        document.getElementById('trackPhoneNumber').value = '';
+    });
 }
 
 // ========== CATEGORY GRID ==========
@@ -533,6 +713,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('checkoutModal')?.addEventListener('click', (e) => {
         if (e.target === document.getElementById('checkoutModal')) closeCheckout();
+    });
+    
+    // Tracking
+    document.getElementById('trackingLink')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openTrackingModal();
+    });
+    document.getElementById('trackingCloseBtn')?.addEventListener('click', closeTrackingModal);
+    document.getElementById('trackOrderBtn')?.addEventListener('click', trackOrder);
+    document.getElementById('trackingModal')?.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('trackingModal')) closeTrackingModal();
     });
     
     // Footer links

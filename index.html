@@ -225,6 +225,55 @@
         </div>
     </div>
 
+    <!-- ORDER TRACKING MODAL -->
+    <div class="tracking-modal" id="trackingModal">
+        <div class="tracking-content">
+            <div class="tracking-header">
+                <div class="tracking-header-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="tracking-header-text">
+                    <h2>Track Your Order</h2>
+                    <p>Enter your order details to see status</p>
+                </div>
+                <button class="tracking-close" id="trackingCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="tracking-body">
+                <div id="trackingForm" class="tracking-form">
+                    <div class="tracking-input-group">
+                        <div class="input-icon">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <div class="input-field">
+                            <label>Order Number</label>
+                            <input type="text" id="trackOrderNumber" placeholder="e.g., MO202501151234">
+                        </div>
+                    </div>
+                    <div class="tracking-input-group">
+                        <div class="input-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="input-field">
+                            <label>Phone Number</label>
+                            <input type="tel" id="trackPhoneNumber" placeholder="0991 234 567">
+                        </div>
+                    </div>
+                    <button class="tracking-btn" id="trackOrderBtn">
+                        <span>Track Order</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div id="trackingLoading" class="tracking-loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Searching for your order...</p>
+                </div>
+                <div id="trackingResult" class="tracking-result" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
         <div class="container">
@@ -240,6 +289,7 @@
                     <p><a href="#" id="contactLink">Contact Us</a></p>
                     <p><a href="#" id="returnsLink">Returns Policy</a></p>
                     <p><a href="#" id="faqLink">FAQs</a></p>
+                    <p><a href="#" id="trackingLink">Track Order</a></p>
                 </div>
                 <div class="footer-col">
                     <h4>Categories</h4>
