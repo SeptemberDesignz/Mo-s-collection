@@ -35,25 +35,34 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 24px 0;
+            padding: 20px 0;
             flex-wrap: wrap;
             gap: 20px;
         }
 
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: 4px;
-            color: #c9a03d;
-            font-family: 'Playfair Display', serif;
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
         }
 
-        .logo span {
-            font-size: 0.7rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            color: #888;
+        .logo-large {
+            font-size: 56px;
+            font-weight: 800;
+            color: #c9a03d;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 6px;
+            text-shadow: 0 0 15px rgba(201, 160, 61, 0.4);
+        }
+
+        .logo-sub {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 6px;
+            color: #c9a03d;
             text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.9;
         }
 
         .nav-links {
@@ -496,6 +505,8 @@
             .hero-shoe-img { width: 220px; }
             .product-card { border-radius: 20px; }
             .feature-card { padding: 16px; }
+            .logo-large { font-size: 32px; letter-spacing: 3px; }
+            .logo-sub { font-size: 10px; letter-spacing: 4px; }
         }
     </style>
 
@@ -503,8 +514,8 @@
         <div class="container">
             <div class="nav-bar">
                 <div class="logo">
-                    <h1>MO'S</h1>
-                    <span>Collection</span>
+                    <span class="logo-large">MO'S</span>
+                    <span class="logo-sub">COLLECTION</span>
                 </div>
                 <div class="nav-links">
                     <a href="#" class="active">Shop</a>
