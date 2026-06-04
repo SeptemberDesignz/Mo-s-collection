@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('trackingLink')?.addEventListener('click', (e) => { e.preventDefault(); openTrackingModal(); });
     document.getElementById('trackingCloseBtn')?.addEventListener('click', closeTrackingModal);
     document.getElementById('trackOrderBtn')?.addEventListener('click', trackOrder);
-    document.getElementById('whatsappFloatBtn')?.addEventListener('click', (e) => { e.preventDefault(); window.open('https://wa.me/265991234567', '_blank'); });
+    document.getElementById('whatsappFloatBtn')?.addEventListener('click', (e) => { e.preventDefault(); window.open('https://wa.me/265888351801', '_blank'); });
     document.getElementById('aboutLink')?.addEventListener('click', (e) => { e.preventDefault(); showToast("Premium footwear since 2025 | Blantyre, Malawi"); });
     document.getElementById('contactLink')?.addEventListener('click', (e) => { e.preventDefault(); showToast("Email: support@moscollection.mw | Phone: +265 991 234 567"); });
     document.getElementById('returnsLink')?.addEventListener('click', (e) => { e.preventDefault(); showToast("30-day return policy on unworn shoes"); });
